@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hk.k415.win/places/schema.json",
+  "title": "粤港澳大湾区景点数据通用格式",
+  "description": "覆盖热门景点、冷门景点、高性价比景点等多种场景的统一数据格式",
+  "type": "object",
+  "required": ["meta", "cities"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "description": "数据集元信息",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "description": "数据集名称，如 热门景点推荐 / 冷门小众景点 / 性价比最高景点" },
+        "description": { "type": "string", "description": "数据集整体说明" },
+        "category": { "type": "string", "enum": ["popular", "unpopular", "value", "custom"], "description": "分类标签：popular=热门, unpopular=冷门, value=高性价比, custom=自定义" },
+        "source": { "type": "string", "description": "数据来源/整理日期，如 2026年6月综合整理" },
+        "version": { "type": "string", "description": "数据版本号" }
+      }
+    },
+    "cities": {
+      "type": "array",
+      "description": "城市列表",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["city", "spots"],
+        "properties": {
+          "city": { "type": "string", "description": "城市名称，如 广州 / 香港" },
+          "spots": {
+            "type": "array",
+            "description": "该城市的景点列表",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["name"],
+              "properties": {
+                "name": { "type": "string", "description": "【必填】景点名称" },
+                "desc": { "type": "string", "description": "【可选】简短描述，1-2句话" },
+                "type": { "type": "string", "description": "【可选】景点类型，如 历史建筑 / 自然风光 / 博物馆" },
+                "price": { "type": "string", "description": "【可选】门票信息，如 免费 / 20元 / 免费（船费另计）" },
+                "highlights": { "type": "string", "description": "【可选】亮点/玩法详细说明" },
+                "tags": {
+                  "type": "array",
+                  "description": "【可选】标签，如 [亲子, 拍照, 徒步]",
+                  "items": { "type": "string" }
+                },
+                "extra": {
+                  "type": "object",
+                  "description": "【可选】扩展字段，存放各数据集特有的额外信息",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
