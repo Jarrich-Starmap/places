@@ -33,7 +33,7 @@
             "minItems": 1,
             "items": {
               "type": "object",
-              "required": ["name", "desc", "type", "price", "highlights", "tags", "extra", "lat", "lng", "best_time", "transport"],
+              "required": ["name", "desc", "type", "price", "highlights", "tags", "lat", "lng", "best_time", "transport"],
               "properties": {
                 "name": { "type": "string", "description": "【必填】景点名称" },
                 "desc": { "type": "string", "description": "【必填】简短描述，1-2句话" },
@@ -51,7 +51,7 @@
                 },
                 "extra": {
                   "type": "object",
-                  "description": "【必填】扩展字段，存放各数据集特有的额外信息",
+                  "description": "【可选】扩展字段，存放各数据集特有的额外信息",
                   "additionalProperties": true
                 }
               }
